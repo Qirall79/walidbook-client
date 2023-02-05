@@ -14,8 +14,8 @@ function App() {
 
   if (!loaded) {
     return (
-      <div>
-        <Loader />
+      <div className="w-screen h-screen bg-[#0077FF] flex items-center justify-center">
+        <Loader isChild={false} />
       </div>
     );
   }

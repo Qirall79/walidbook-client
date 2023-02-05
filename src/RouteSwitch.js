@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import User from "./components/User";
@@ -11,11 +11,15 @@ const BrowserSwitch = ({ user, setUser }) => {
     <div className="w-screen h-screen bg-[#0077FF] flex items-center justify-center">
       <BrowserRouter>
         <Routes>
+          <Route path="/home" element={<Navigate to={"/"} />} />
           <Route path="/" element={<Home user={user} />} />
-          <Route path="/login" element={<Login user={user} setUser={user} />} />
+          <Route
+            path="/login"
+            element={<Login user={user} setUser={setUser} />}
+          />
           <Route
             path="/signup"
-            element={<Signup user={user} setUser={user} />}
+            element={<Signup user={user} setUser={setUser} />}
           />
           <Route path="/user" element={<User user={user} />} />
         </Routes>

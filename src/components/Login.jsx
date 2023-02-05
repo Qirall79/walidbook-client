@@ -1,6 +1,23 @@
 import { Navigate, Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import loginUser from "../utils/loginUser";
+import Loader from "./Loader";
 
 const Login = ({ user, setUser }) => {
+  const [response, setResponse] = useState({ success: false });
+  const [sent, setSent] = useState(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
+    setSent(true);
+    await loginUser(data, setResponse, setSent, setUser);
+  };
+
   if (user) {
     return <Navigate to={"/"} />;
   }
@@ -21,47 +38,93 @@ const Login = ({ user, setUser }) => {
           </h1>
         </div>
       </div>
-      <div className="w-1/2 p-32 flex flex-col items-center justify-center">
-        <h1 className="self-start w-[100px] mb-20 pb-3 text-3xl font-semibold text-slate-300 border-b-[3px] border-slate-400 ">
-          Login
-        </h1>
-        <form method="post" className="w-full flex flex-col gap-10">
-          <div className="form-group flex flex-col gap-3">
-            <label htmlFor="email" className="text-[#0076FC] font-medium">
-              Email
-            </label>
-            <input
-              type="text"
-              name="email"
-              id="email"
-              className="bg-transparent border-b-[1px] border-slate-400 outline-none text-slate-50 text-sm pl-1 pb-1"
-            />
+      {sent ? (
+        response.success ? (
+          <Navigate to={"/"} />
+        ) : (
+          <div className="w-1/2 flex flex-col items-center justify-center">
+            <Loader isChild={true} />
           </div>
-          <div className="form-group flex flex-col gap-3">
-            <label htmlFor="password" className="text-[#0076FC] font-medium">
-              Password
-            </label>
+        )
+      ) : (
+        <div className="w-1/2 p-32 flex flex-col items-center justify-center">
+          <h1 className="self-start w-[100px] mb-20 pb-3 text-3xl font-semibold text-slate-300 border-b-[3px] border-slate-400 ">
+            Login
+          </h1>
+          <form
+            method="post"
+            className="w-full flex flex-col gap-10"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <div className="form-group flex flex-col gap-3">
+              <label htmlFor="email" className="text-[#0076FC] font-medium">
+                Email
+              </label>
+              <input
+                type="text"
+                name="email"
+                id="email"
+                className="bg-transparent border-b-[1px] border-slate-400 outline-none text-slate-50 text-sm pl-1 pb-1"
+                {...register("email", {
+                  required: "Email is required.",
+                  pattern: {
+                    value:
+                      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                    message: "Invalid email.",
+                  },
+                })}
+              />
+              {errors.email ? (
+                <p className="text-sm text-red-500 font-medium">
+                  {errors.email.message}
+                </p>
+              ) : (
+                ""
+              )}
+            </div>
+            <div className="form-group flex flex-col gap-3">
+              <label htmlFor="password" className="text-[#0076FC] font-medium">
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                className="bg-transparent border-b-[1px] border-slate-400 outline-none text-slate-50 text-sm pl-1 pb-1"
+                {...register("password", {
+                  required: "Password is required.",
+                })}
+              />
+              {errors.password ? (
+                <p className="text-sm text-red-500 font-medium">
+                  {errors.password.message}
+                </p>
+              ) : (
+                ""
+              )}
+            </div>
             <input
-              type="password"
-              name="password"
-              id="password"
-              className="bg-transparent border-b-[1px] border-slate-400 outline-none text-slate-50 text-sm pl-1 pb-1"
+              type="submit"
+              value="Login"
+              className="self-start bg-[#0077FF] px-10 py-2 text-sm font-medium text-white cursor-pointer rounded-2xl hover:bg-[#115fb8] transition-all"
             />
-          </div>
-          <input
-            type="submit"
-            value="Login"
-            className="self-start bg-[#0077FF] px-10 py-2 text-sm font-medium text-white cursor-pointer rounded-2xl hover:bg-[#115fb8] transition-all"
-          />
-          <p className="text-slate-50">
-            Don't have an account ?{" "}
-            <Link to={"/signup"} className="text-[#0077FF] font-medium">
-              {" "}
-              Sign Up
-            </Link>
-          </p>
-        </form>
-      </div>
+            {response.message ? (
+              <p className="text-sm text-red-500 font-medium">
+                Invalid credentials.
+              </p>
+            ) : (
+              ""
+            )}
+            <p className="text-slate-50">
+              Don't have an account ?{" "}
+              <Link to={"/signup"} className="text-[#0077FF] font-medium">
+                {" "}
+                Sign Up
+              </Link>
+            </p>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
