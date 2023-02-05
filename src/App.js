@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+
+import Loader from "./components/Loader";
+import fetchUser from "./utils/fetchUser";
+import BrowserSwitch from "./RouteSwitch";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [user, setUser] = useState();
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    fetchUser(setUser, setLoaded);
+  }, []);
+
+  if (!loaded) {
+    return (
+      <div>
+        <Loader />
+      </div>
+    );
+  }
+  return <BrowserSwitch user={user} setUser={setUser} />;
 }
 
 export default App;
