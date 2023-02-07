@@ -40,12 +40,14 @@ const Signup = ({ user, setUser }) => {
     const img = document.querySelector("input[type='file'");
     const imageFile = img.files[0];
 
-    // Resize image to increase performance
-    const resizedImg = await resizeImage(imageFile);
-    const image = await urlToFile(resizedImg, "picture.png", "image/png");
+    if (imageFile) {
+      // Resize image to increase performance
+      const resizedImg = await resizeImage(imageFile);
+      const image = await urlToFile(resizedImg, "picture.png", "image/png");
 
-    if (img.value) {
-      formData.append("image", image);
+      if (img.value) {
+        formData.append("image", image);
+      }
     }
 
     setMatch(true);

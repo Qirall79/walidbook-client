@@ -13,10 +13,10 @@ const fetchUser = async (setUser, setLoaded) => {
     const response = await axios.get(url + "/user", {
       method: "GET",
       headers: {
-        Authorization: token,
+        Authorization: token || "",
       },
     });
-    setUser(response.data);
+    setUser(response.data.user);
   } catch (err) {
     console.log(err);
   }
