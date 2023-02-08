@@ -2,9 +2,12 @@ import { useState } from "react";
 import sendLike from "../utils/sendLike";
 import { AiOutlineLike, AiFillLike, AiOutlineComment } from "react-icons/ai";
 import Comments from "./Comments";
+import CommentForm from "./CommentForm";
+import sendComment from "../utils/sendComment";
 
-const Post = ({ post, comments, user }) => {
+const Post = ({ post, postComments, user }) => {
   const [likes, setLikes] = useState(post.likes);
+  const [comments, setComments] = useState([...postComments]);
 
   const displayComments = () => {
     const commentsDiv = document.getElementById("comments-" + post._id);
@@ -29,6 +32,16 @@ const Post = ({ post, comments, user }) => {
     } else {
       setLikes({ ...likes, [user._id.toString()]: "true" });
     }
+  };
+
+  const submitComment = async ({ body }) => {
+    const { comment, author } = await sendComment(
+      body,
+      user._id.toString(),
+      post._id.toString()
+    );
+    const newComment = { ...comment, author };
+    setComments([...comments, newComment]);
   };
 
   return (
@@ -68,7 +81,7 @@ const Post = ({ post, comments, user }) => {
             ) : (
               <AiOutlineLike />
             )}
-            <p className="text-sm">{Object.keys(likes).length}</p>
+            <span className="text-sm">{Object.keys(likes).length}</span>
           </p>
           <p
             className="cursor-pointer flex items-center text-xl"
@@ -78,7 +91,13 @@ const Post = ({ post, comments, user }) => {
           </p>
         </div>
         <div className="p-5 flex-col gap-3 hidden" id={"comments-" + post._id}>
-          <Comments comments={comments} post={post} />
+          <Comments
+            setComments={setComments}
+            comments={comments}
+            post={post}
+            user={user}
+          />
+          <CommentForm submitComment={submitComment} />
         </div>
       </div>
     </div>
