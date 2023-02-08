@@ -17,7 +17,6 @@ const fetchPosts = async (user) => {
     return posts;
   } catch (err) {
     console.log(err);
-    return [];
   }
 };
 
