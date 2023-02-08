@@ -4,8 +4,10 @@ const Loader = ({ isChild }) => {
   return (
     <div
       className={`${
-        isChild ? "w-full h-full" : "w-[1300px] h-[800px]"
-      } bg-[#002550] flex items-center justify-center`}
+        isChild
+          ? "w-full h-full bg-transparent"
+          : "w-[1300px] h-[800px] bg-[#002550]"
+      }  flex items-center justify-center`}
     >
       <ThreeDots
         height="80"
