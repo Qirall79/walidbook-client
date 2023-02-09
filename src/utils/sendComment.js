@@ -1,9 +1,10 @@
 import axios from "axios";
+import apiUrl from "./apiUrl";
 
 const sendComment = async (body, userId, postId) => {
   try {
     const response = await axios.post(
-      `http://localhost:5000/posts/${postId}/comments`,
+      `${apiUrl}posts/${postId}/comments`,
       {
         body,
         author: userId,

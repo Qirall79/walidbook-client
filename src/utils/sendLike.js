@@ -1,9 +1,10 @@
 import axios from "axios";
+import apiUrl from "./apiUrl";
 
 const sendLike = async (postId, author) => {
   try {
     await axios.put(
-      `http://localhost:5000/posts/${postId}/likes`,
+      `${apiUrl}posts/${postId}/likes`,
       {
         author,
       },

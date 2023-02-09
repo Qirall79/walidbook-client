@@ -1,4 +1,5 @@
 import axios from "axios";
+import apiUrl from "./apiUrl";
 
 const fetchUser = async (setUser, setLoaded) => {
   try {
@@ -9,8 +10,7 @@ const fetchUser = async (setUser, setLoaded) => {
       return;
     }
 
-    const url = process.env.URL || "http://localhost:5000";
-    const response = await axios.get(url + "/user", {
+    const response = await axios.get(apiUrl + "user", {
       method: "GET",
       headers: {
         Authorization: token || "",

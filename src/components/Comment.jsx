@@ -23,7 +23,7 @@ const Comment = ({ comment, user, setComments, comments }) => {
       {showDeleteForm ? (
         <ConfirmationForm
           setShowDeleteForm={setShowDeleteForm}
-          removeComment={removeComment}
+          remove={removeComment}
         />
       ) : (
         <div>

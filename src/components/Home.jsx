@@ -7,23 +7,24 @@ import Sidebar from "./Sidebar";
 import Post from "./Post";
 import Loader from "./Loader";
 import CommentForm from "./CommentForm";
+import PostForm from "./PostForm";
 
 const Home = ({ user }) => {
   const [posts, setPosts] = useState([]);
   const [fetched, setFetched] = useState(false);
   const [comments, setComments] = useState([]);
 
+  const getPosts = async () => {
+    const fetchedPosts = await fetchPosts(user);
+    let allPosts = [...fetchedPosts.userPosts, ...fetchedPosts.friendPosts];
+    allPosts = allPosts.sort(
+      (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
+    );
+    setComments([...fetchedPosts.comments]);
+    setPosts(allPosts);
+    setFetched(true);
+  };
   useEffect(() => {
-    const getPosts = async () => {
-      const fetchedPosts = await fetchPosts(user);
-      let allPosts = [...fetchedPosts.userPosts, ...fetchedPosts.friendPosts];
-      allPosts = allPosts.sort(
-        (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
-      );
-      setComments([...fetchedPosts.comments]);
-      setPosts(allPosts);
-      setFetched(true);
-    };
     getPosts();
   }, []);
 
@@ -36,6 +37,7 @@ const Home = ({ user }) => {
 
       <div className="pl-1 flex items-center justify-start">
         <div className="w-[97%] h-[93%] bg-slate-200 rounded-3xl p-5 text-black flex flex-col gap-9 items-center overflow-y-scroll">
+          <PostForm getPosts={getPosts} user={user} />
           {!fetched ? (
             <Loader isChild={true} />
           ) : !posts.length ? (
@@ -44,6 +46,8 @@ const Home = ({ user }) => {
             posts.map((post) => {
               return (
                 <Post
+                  posts={posts}
+                  setPosts={setPosts}
                   key={post._id}
                   user={user}
                   postComments={comments.filter(

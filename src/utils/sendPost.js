@@ -1,17 +1,17 @@
 import axios from "axios";
 import apiUrl from "./apiUrl";
 
-const deleteComment = async (postId, commentId) => {
+const sendPost = async (data) => {
   try {
-    await axios.delete(`${apiUrl}posts/${postId}/comments/${commentId}`, {
+    const response = await axios.post(apiUrl + "posts", data, {
       headers: {
         Authorization: localStorage.getItem("token") || "",
       },
     });
-    console.log("done");
+    console.log(response.data);
   } catch (err) {
     console.log(err);
   }
 };
 
-export default deleteComment;
+export default sendPost;

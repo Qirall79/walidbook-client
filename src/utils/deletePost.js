@@ -1,9 +1,9 @@
 import axios from "axios";
 import apiUrl from "./apiUrl";
 
-const deleteComment = async (postId, commentId) => {
+const deletePost = async (postId) => {
   try {
-    await axios.delete(`${apiUrl}posts/${postId}/comments/${commentId}`, {
+    await axios.delete(apiUrl + "posts/" + postId, {
       headers: {
         Authorization: localStorage.getItem("token") || "",
       },
@@ -14,4 +14,4 @@ const deleteComment = async (postId, commentId) => {
   }
 };
 
-export default deleteComment;
+export default deletePost;

@@ -4,10 +4,18 @@ import { AiOutlineLike, AiFillLike, AiOutlineComment } from "react-icons/ai";
 import Comments from "./Comments";
 import CommentForm from "./CommentForm";
 import sendComment from "../utils/sendComment";
+import { TiDelete } from "react-icons/ti";
+import ConfirmationForm from "./ConfirmationForm";
+import deletePost from "../utils/deletePost";
 
-const Post = ({ post, postComments, user }) => {
+const Post = ({ post, postComments, user, posts, setPosts }) => {
   const [likes, setLikes] = useState(post.likes);
   const [comments, setComments] = useState([...postComments]);
+  const [confirm, setConfirm] = useState(false);
+
+  const showConfirmation = () => {
+    setConfirm(true);
+  };
 
   const displayComments = () => {
     const commentsDiv = document.getElementById("comments-" + post._id);
@@ -44,62 +52,96 @@ const Post = ({ post, postComments, user }) => {
     setComments([...comments, newComment]);
   };
 
+  const removePost = async () => {
+    const newPosts = posts.filter(
+      (p) => p._id.toString() !== post._id.toString()
+    );
+    setPosts(newPosts);
+    await deletePost(post._id.toString());
+  };
+
   return (
     <div className="text-black w-[400px]  bg-slate-400 flex flex-col gap-7 rounded-2xl">
-      <div className="flex gap-2 items-center px-5 pt-5">
-        <img
-          src={post.author.image || "./images/none.webp"}
-          alt="profile"
-          className="w-12 rounded-full"
-        />
-        <div>
-          <p className="capitalize font-bold text-sm mb-1">
-            {post.author.firstName + " " + post.author.lastName}
-          </p>
-          <p className="text-xs text-slate-700">{post.timestamp}</p>
-        </div>
-      </div>
-      <div className="px-5">
-        <p className="mb-4">{post.description}</p>
-        <img
-          src={post.image || "./images/none.webp"}
-          alt="post"
-          className="w-full"
-        />
-      </div>
-      <div>
-        <div
-          className="py-3 px-5 rounded-b-2xl flex gap-5 bg-slate-50"
-          id={"sibling-" + post._id}
-        >
-          <p
-            className="cursor-pointer flex gap-1 items-center text-lg"
-            onClick={toggleLike}
-          >
-            {Object.keys(likes).includes(user._id.toString()) ? (
-              <AiFillLike />
-            ) : (
-              <AiOutlineLike />
-            )}
-            <span className="text-sm">{Object.keys(likes).length}</span>
-          </p>
-          <p
-            className="cursor-pointer flex items-center text-xl"
-            onClick={displayComments}
-          >
-            <AiOutlineComment />
-          </p>
-        </div>
-        <div className="p-5 flex-col gap-3 hidden" id={"comments-" + post._id}>
-          <Comments
-            setComments={setComments}
-            comments={comments}
-            post={post}
-            user={user}
+      {confirm ? (
+        <div className="p-5">
+          <ConfirmationForm
+            setShowDeleteForm={setConfirm}
+            remove={removePost}
           />
-          <CommentForm submitComment={submitComment} />
         </div>
-      </div>
+      ) : (
+        <div className="flex flex-col gap-7 relative">
+          <div className="flex gap-2 items-center px-5 pt-5">
+            <img
+              src={post.author.image || "./images/none.webp"}
+              alt="profile"
+              className="w-12 rounded-full"
+            />
+            <div>
+              <p className="capitalize font-bold text-sm mb-1">
+                {post.author.firstName + " " + post.author.lastName}
+              </p>
+              <p className="text-xs text-slate-700">{post.timestamp}</p>
+            </div>
+          </div>
+          <div className="px-5">
+            <p className="mb-4">{post.description}</p>
+            {post.image ? (
+              <img
+                src={post.image || "./images/none.webp"}
+                alt="post"
+                className="w-full"
+              />
+            ) : (
+              ""
+            )}
+          </div>
+          <div>
+            <div
+              className="py-3 px-5 rounded-b-2xl flex gap-5 bg-slate-50"
+              id={"sibling-" + post._id}
+            >
+              <p
+                className="cursor-pointer flex gap-1 items-center text-lg"
+                onClick={toggleLike}
+              >
+                {Object.keys(likes).includes(user._id.toString()) ? (
+                  <AiFillLike />
+                ) : (
+                  <AiOutlineLike />
+                )}
+                <span className="text-sm">{Object.keys(likes).length}</span>
+              </p>
+              <p
+                className="cursor-pointer flex items-center text-xl"
+                onClick={displayComments}
+              >
+                <AiOutlineComment />
+              </p>
+            </div>
+            <div
+              className="p-5 flex-col gap-3 hidden   bg-slate-300"
+              id={"comments-" + post._id}
+            >
+              <Comments
+                setComments={setComments}
+                comments={comments}
+                post={post}
+                user={user}
+              />
+              <CommentForm submitComment={submitComment} />
+            </div>
+          </div>
+          {user._id.toString() === post.author._id.toString() ? (
+            <TiDelete
+              className="absolute top-2 right-2 cursor-pointer text-xl"
+              onClick={showConfirmation}
+            />
+          ) : (
+            ""
+          )}
+        </div>
+      )}
     </div>
   );
 };

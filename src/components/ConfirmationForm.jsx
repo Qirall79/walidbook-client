@@ -1,4 +1,4 @@
-const ConfirmationForm = ({ setShowDeleteForm, removeComment }) => {
+const ConfirmationForm = ({ setShowDeleteForm, remove }) => {
   const hideForm = () => {
     setShowDeleteForm(false);
   };
@@ -8,7 +8,7 @@ const ConfirmationForm = ({ setShowDeleteForm, removeComment }) => {
       <div className="flex gap-5">
         <button
           className="px-3 py-1 bg-red-800 text-white rounded-md font-medium"
-          onClick={removeComment}
+          onClick={remove}
         >
           Delete
         </button>

@@ -1,13 +1,11 @@
 import axios from "axios";
+import apiUrl from "./apiUrl";
 import fetchUser from "./fetchUser";
 
 const signupUser = async (formData, setResponse, setSent, setUser) => {
   setSent(true);
   try {
-    const response = await axios.post(
-      "http://localhost:5000/auth/signup",
-      formData
-    );
+    const response = await axios.post(apiUrl + "auth/signup", formData);
     const token = "Bearer " + response.data.token;
     localStorage.setItem("token", token);
     await fetchUser(setUser, setSent);
