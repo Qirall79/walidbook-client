@@ -7,6 +7,7 @@ import sendComment from "../utils/sendComment";
 import { TiDelete } from "react-icons/ti";
 import ConfirmationForm from "./ConfirmationForm";
 import deletePost from "../utils/deletePost";
+import { Link } from "react-router-dom";
 
 const Post = ({ post, postComments, user, posts, setPosts }) => {
   const [likes, setLikes] = useState(post.likes);
@@ -73,25 +74,24 @@ const Post = ({ post, postComments, user, posts, setPosts }) => {
         <div className="flex flex-col gap-7 relative">
           <div className="flex gap-2 items-center px-5 pt-5">
             <img
-              src={post.author.image || "./images/none.webp"}
+              src={post.author.image || "../images/none.webp"}
               alt="profile"
               className="w-12 rounded-full"
             />
             <div>
-              <p className="capitalize font-bold text-sm mb-1">
+              <Link
+                className="capitalize font-bold text-sm mb-1"
+                to={"/user/" + post.author._id}
+              >
                 {post.author.firstName + " " + post.author.lastName}
-              </p>
+              </Link>
               <p className="text-xs text-slate-700">{post.timestamp}</p>
             </div>
           </div>
           <div className="px-5">
             <p className="mb-4">{post.description}</p>
             {post.image ? (
-              <img
-                src={post.image || "./images/none.webp"}
-                alt="post"
-                className="w-full"
-              />
+              <img src={post.image} alt="post" className="w-full" />
             ) : (
               ""
             )}

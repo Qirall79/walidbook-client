@@ -4,15 +4,21 @@ const CommentForm = ({ submitComment }) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
+
+  const getSubmit = (data) => {
+    submitComment(data);
+    reset();
+  };
 
   return (
     <div className="w-full p-3 bg-amber-400 rounded-lg">
       <form
         method="post"
         className="flex flex-col items-start gap-3"
-        onSubmit={handleSubmit(submitComment)}
+        onSubmit={handleSubmit(getSubmit)}
       >
         <input
           {...register("body", {

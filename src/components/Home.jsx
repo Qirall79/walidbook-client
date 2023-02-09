@@ -33,10 +33,10 @@ const Home = ({ user }) => {
   }
   return (
     <div className="w-[1300px] h-[800px] bg-[#002550] grid grid-cols-[1fr_4fr] grid-rows-1 text-white rounded-3xl">
-      <Sidebar user={user} />
+      <Sidebar user={user} path={"/"} />
 
       <div className="pl-1 flex items-center justify-start">
-        <div className="w-[97%] h-[93%] bg-slate-200 rounded-3xl p-5 text-black flex flex-col gap-9 items-center overflow-y-scroll">
+        <div className="w-[97%] h-[93%] bg-slate-900 rounded-3xl p-5 text-black flex flex-col gap-9 items-center overflow-auto">
           <PostForm getPosts={getPosts} user={user} />
           {!fetched ? (
             <Loader isChild={true} />

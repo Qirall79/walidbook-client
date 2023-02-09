@@ -19,7 +19,7 @@ const Comment = ({ comment, user, setComments, comments }) => {
   };
 
   return (
-    <div className="rounded-lg bg-slate-300 p-2 relative">
+    <div className="rounded-lg bg-slate-400 p-2 relative">
       {showDeleteForm ? (
         <ConfirmationForm
           setShowDeleteForm={setShowDeleteForm}
