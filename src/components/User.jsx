@@ -119,7 +119,10 @@ const User = ({ currentUser, setCurrentUser }) => {
             <div className="w-full flex flex-col items-center gap-8">
               <div className="w-full p-8 rounded-lg flex flex-col items-center text-white gap-4 bg-[#002550]">
                 <img
-                  src={user.image || "../images/none.webp"}
+                  src={
+                    user.image ||
+                    "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fvectors%2Fblank-profile-picture-mystery-man-973460%2F&psig=AOvVaw2QfbjC2xQ2N8odZOtjCLt-&ust=1676123694451000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJiHor6Ni_0CFQAAAAAdAAAAABAE"
+                  }
                   alt="profile"
                   className="max-w-[200px] rounded-full"
                 />

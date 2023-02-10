@@ -27,7 +27,10 @@ const CurrentUser = ({ user }) => {
         <div className="w-[97%] h-[93%] bg-slate-900 rounded-3xl p-5 text-black flex flex-col gap-9 items-center overflow-auto">
           <div className="w-full p-8 rounded-lg flex flex-col items-center gap-4 text-white bg-[#002550]">
             <img
-              src={user.image || "./images/none.webp"}
+              src={
+                user.image ||
+                "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fvectors%2Fblank-profile-picture-mystery-man-973460%2F&psig=AOvVaw2QfbjC2xQ2N8odZOtjCLt-&ust=1676123694451000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJiHor6Ni_0CFQAAAAAdAAAAABAE"
+              }
               alt="profile"
               className="max-w-[200px] rounded-full"
             />
