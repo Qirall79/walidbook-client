@@ -8,8 +8,12 @@ function App() {
   const [user, setUser] = useState();
   const [loaded, setLoaded] = useState(false);
 
+  const getUser = async () => {
+    await fetchUser(setUser, setLoaded);
+  }
+
   useEffect(() => {
-    fetchUser(setUser, setLoaded);
+    getUser();
   }, []);
 
   if (!loaded) {

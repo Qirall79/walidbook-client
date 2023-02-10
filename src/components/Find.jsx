@@ -51,7 +51,7 @@ const Find = ({ user }) => {
                 >
                   <img
                     className="w-[55px] rounded-full"
-                    src={user.image || "../images/none.webp"}
+                    src={user.image || "./images/none.webp"}
                     alt="profile"
                   />
                   <Link

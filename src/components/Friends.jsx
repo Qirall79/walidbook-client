@@ -7,7 +7,7 @@ const Friends = ({ user }) => {
       <Sidebar user={user} path={"/friends"} />
       <div className="pl-1 flex items-center justify-start">
         <div className="w-[97%] h-[93%] bg-slate-900 rounded-3xl p-5 text-black flex flex-col gap-9 items-center">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          <div className="p-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {!user.friends.length ? (
               <p className="text-white font-bold">You have no friends.</p>
             ) : (

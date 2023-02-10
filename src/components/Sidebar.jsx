@@ -9,7 +9,9 @@ import { Link } from "react-router-dom";
 const Sidebar = ({ user, path }) => {
   const setLink = () => {
     const links = document.querySelectorAll(".link-elem");
-    const target = document.querySelector(`a[href='${path}']`);
+    const target = document.querySelector(
+      `a[href='/walidbook-client${path === "/" ? "" : path}']`
+    );
 
     links.forEach((link) => {
       link.classList.remove("border-l-4");
