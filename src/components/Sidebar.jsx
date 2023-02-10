@@ -5,6 +5,8 @@ import { FaUserFriends } from "react-icons/fa";
 import { GiThreeFriends } from "react-icons/gi";
 import { HiUserAdd } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { IoMdSettings } from "react-icons/io";
+import { RiLogoutBoxRFill } from "react-icons/ri";
 
 const Sidebar = ({ user, path }) => {
   const setLink = () => {
@@ -71,6 +73,18 @@ const Sidebar = ({ user, path }) => {
           className="link-elem pl-10  h-10 flex items-center gap-6 cursor-pointer hover:bg-amber-500 transition-all"
         >
           <GiThreeFriends className="text-xl" /> Find Friends
+        </Link>
+        <Link
+          to={"/settings"}
+          className="link-elem pl-10  h-10 flex items-center gap-6 cursor-pointer hover:bg-amber-500 transition-all"
+        >
+          <IoMdSettings className="text-xl" /> Settings
+        </Link>
+        <Link
+          to={"/logout"}
+          className="link-elem pl-10  h-10 flex items-center gap-6 cursor-pointer hover:bg-amber-500 transition-all"
+        >
+          <RiLogoutBoxRFill className="text-xl" /> Log out
         </Link>
       </ul>
     </div>

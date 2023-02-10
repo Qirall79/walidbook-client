@@ -8,7 +8,6 @@ const deleteComment = async (postId, commentId) => {
         Authorization: localStorage.getItem("token") || "",
       },
     });
-    console.log("done");
   } catch (err) {
     console.log(err);
   }

@@ -8,7 +8,6 @@ const sendPost = async (data) => {
         Authorization: localStorage.getItem("token") || "",
       },
     });
-    console.log(response.data);
   } catch (err) {
     console.log(err);
   }

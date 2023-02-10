@@ -9,6 +9,8 @@ import Friends from "./components/Friends";
 import styles from "./index.css";
 import Requests from "./components/Requests";
 import Find from "./components/Find";
+import Settings from "./components/Settings";
+import Logout from "./components/Logout";
 
 const BrowserSwitch = ({ user, setUser }) => {
   return (
@@ -17,9 +19,36 @@ const BrowserSwitch = ({ user, setUser }) => {
         <Routes>
           <Route path="/" element={<Home user={user} />} />
           <Route path="/home" element={<Navigate to={"/"} />} />
-          <Route path="/friends" element={<Friends user={user} />} />
-          <Route path="/requests" element={<Requests user={user} />} />
-          <Route path="/find" element={<Find user={user} />} />
+          <Route
+            path="/friends"
+            element={
+              user ? <Friends user={user} /> : <Navigate to={"/login"} />
+            }
+          />
+          <Route
+            path="/requests"
+            element={
+              user ? <Requests user={user} /> : <Navigate to={"/login"} />
+            }
+          />
+          <Route
+            path="/find"
+            element={user ? <Find user={user} /> : <Navigate to={"/login"} />}
+          />
+          <Route
+            path="/logout"
+            element={user ? <Logout user={user} /> : <Navigate to={"/login"} />}
+          />
+          <Route
+            path="/settings"
+            element={
+              user ? (
+                <Settings user={user} setUser={setUser} />
+              ) : (
+                <Navigate to={"/login"} />
+              )
+            }
+          />
 
           <Route
             path="/user/:userId"
@@ -39,7 +68,12 @@ const BrowserSwitch = ({ user, setUser }) => {
             path="/signup"
             element={<Signup user={user} setUser={setUser} />}
           />
-          <Route path="/user" element={<CurrentUser user={user} />} />
+          <Route
+            path="/user"
+            element={
+              user ? <CurrentUser user={user} /> : <Navigate to={"/login"} />
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

@@ -12,7 +12,6 @@ const updateRequest = async (action, senderId, receiverId) => {
         },
       }
     );
-    console.log(response.data);
   } catch (err) {
     console.log(err);
   }

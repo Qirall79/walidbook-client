@@ -10,7 +10,6 @@ const signupUser = async (formData, setResponse, setSent, setUser) => {
     localStorage.setItem("token", token);
     await fetchUser(setUser, setSent);
     setResponse({ success: true });
-    console.log(response);
   } catch (err) {
     console.log(err);
     setSent(false);

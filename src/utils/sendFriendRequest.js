@@ -12,7 +12,6 @@ const sendFriendRequest = async (senderId, receiverId) => {
         },
       }
     );
-    console.log(response);
   } catch (err) {
     console.log(err);
   }

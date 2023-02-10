@@ -8,7 +8,6 @@ const deleteFriend = async (userId, friendId) => {
         Authorization: localStorage.getItem("token") || "",
       },
     });
-    console.log(response);
   } catch (err) {
     console.log(err);
   }

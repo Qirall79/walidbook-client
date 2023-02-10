@@ -9,8 +9,6 @@ const loginUser = async (formData, setResponse, setSent, setUser) => {
     localStorage.setItem("token", token);
     await fetchUser(setUser, setSent);
     setResponse({ success: true });
-
-    console.log(response);
   } catch (err) {
     setResponse({ success: false, message: err.response.data.message });
     setSent(false);
