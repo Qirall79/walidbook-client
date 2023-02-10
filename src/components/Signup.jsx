@@ -64,7 +64,7 @@ const Signup = ({ user, setUser }) => {
         <div className="z-10 flex flex-col items-center gap-8">
           <div className="w-28 scale-125">
             <img
-              src="./images/logo.png"
+              src={process.env.PUBLIC_URL + "/images/logo.png"}
               alt="logo"
               className="z-10 max-w-full rounded-full "
             />

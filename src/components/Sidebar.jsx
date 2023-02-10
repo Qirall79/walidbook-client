@@ -12,7 +12,7 @@ const Sidebar = ({ user, path }) => {
   const setLink = () => {
     const links = document.querySelectorAll(".link-elem");
     const target = document.querySelector(
-      `a[href='/walidbook-client${path === "/" ? "" : path}']`
+      `a[href='#/walidbook-client${path === "/" ? "" : path}']`
     );
 
     links.forEach((link) => {
@@ -35,7 +35,7 @@ const Sidebar = ({ user, path }) => {
           src={
             user.image?.length
               ? user.image
-              : "https://www.google.com/url?sa=i&url=https%3A%2F%2Fpixabay.com%2Fvectors%2Fblank-profile-picture-mystery-man-973460%2F&psig=AOvVaw2QfbjC2xQ2N8odZOtjCLt-&ust=1676123694451000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCJiHor6Ni_0CFQAAAAAdAAAAABAE"
+              : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
           }
           alt="profile"
           className="w-16 rounded-xl"

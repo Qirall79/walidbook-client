@@ -61,7 +61,7 @@ const Settings = ({ user, setUser }) => {
     formData.append("user", user._id);
 
     setIsSaving(true);
-    const newUser = await updateUser(formData);
+    const newUser = await updateUser(formData, user);
     setUser(newUser);
     setIsSaving(false);
   };
