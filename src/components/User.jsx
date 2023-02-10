@@ -189,7 +189,7 @@ const User = ({ currentUser, setCurrentUser }) => {
                       posts={userPosts}
                       setPosts={setUserPosts}
                       key={post._id}
-                      user={user}
+                      user={currentUser}
                       postComments={comments.filter(
                         (comment) =>
                           comment.post._id.toString() === post._id.toString()
