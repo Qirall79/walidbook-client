@@ -33,12 +33,12 @@ const Sidebar = ({ user, path }) => {
       <div className="w-full mb-24 p-7 flex gap-4 items-center">
         <img
           src={
-            user.image?.length
+            user.image
               ? user.image
               : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
           }
           alt="profile"
-          className="w-16 rounded-xl"
+          className="w-16 h-16 rounded-xl"
         />
         <div>
           <p className="text-sm font-semibold mb-1 capitalize">

@@ -29,7 +29,7 @@ const Comment = ({ comment, user, setComments, comments }) => {
         <div>
           <div className="flex gap-3 items-center mb-5">
             <img
-              className="w-10 rounded-full"
+              className="w-10 h-10 rounded-full"
               src={
                 comment.author.image ||
                 "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
