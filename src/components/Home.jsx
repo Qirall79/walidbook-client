@@ -41,7 +41,7 @@ const Home = ({ user }) => {
           {!fetched ? (
             <Loader isChild={true} />
           ) : !posts.length ? (
-            "No posts, post something or get some friends ya lwa7id."
+            <p className="text-white font-semibold">No posts available.</p>
           ) : (
             posts.map((post) => {
               return (
