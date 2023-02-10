@@ -113,8 +113,6 @@ const User = ({ currentUser, setCurrentUser }) => {
         <div className="w-[97%] h-[93%] bg-slate-900 rounded-3xl p-5 text-black flex flex-col gap-9 items-center overflow-y-scroll">
           {!fetched ? (
             <Loader isChild={true} />
-          ) : !userPosts.length ? (
-            "You have no posts yet."
           ) : (
             <div className="w-full flex flex-col items-center gap-8">
               <div className="w-full p-8 rounded-lg flex flex-col items-center text-white gap-4 bg-[#002550]">
@@ -182,21 +180,25 @@ const User = ({ currentUser, setCurrentUser }) => {
                   </div>
                 </div>
               </div>
-              {userPosts.map((post) => {
-                return (
-                  <Post
-                    posts={userPosts}
-                    setPosts={setUserPosts}
-                    key={post._id}
-                    user={user}
-                    postComments={comments.filter(
-                      (comment) =>
-                        comment.post._id.toString() === post._id.toString()
-                    )}
-                    post={post}
-                  />
-                );
-              })}
+              {!userPosts.length ? (
+                <p className="text-white font-semibold">User has no posts</p>
+              ) : (
+                userPosts.map((post) => {
+                  return (
+                    <Post
+                      posts={userPosts}
+                      setPosts={setUserPosts}
+                      key={post._id}
+                      user={user}
+                      postComments={comments.filter(
+                        (comment) =>
+                          comment.post._id.toString() === post._id.toString()
+                      )}
+                      post={post}
+                    />
+                  );
+                })
+              )}
             </div>
           )}
         </div>

@@ -46,7 +46,7 @@ const CurrentUser = ({ user }) => {
             {!fetched ? (
               <Loader isChild={true} />
             ) : !userPosts.length ? (
-              "You have no posts yet."
+              <p className="text-white font-semibold">You have no posts</p>
             ) : (
               userPosts.map((post) => {
                 return (

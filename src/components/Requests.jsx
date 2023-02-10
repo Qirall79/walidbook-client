@@ -14,6 +14,7 @@ const Requests = ({ user }) => {
               </p>
             ) : (
               user.receivedRequests.map((req) => {
+                console.log(req);
                 return (
                   <div
                     className="max-w-[500px] flex items-center gap-5 bg-slate-800 py-3 px-7 rounded-lg"
