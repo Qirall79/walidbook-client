@@ -37,7 +37,7 @@ const BrowserSwitch = ({ user, setUser }) => {
           />
           <Route
             path="/logout"
-            element={user ? <Logout user={user} /> : <Navigate to={"/login"} />}
+            element={user ? <Logout user={user} /> : <Navigate to={"/"} />}
           />
           <Route
             path="/settings"
