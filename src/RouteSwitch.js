@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import User from "./components/User";
@@ -15,9 +15,12 @@ import Logout from "./components/Logout";
 const BrowserSwitch = ({ user, setUser }) => {
   return (
     <div className="w-screen h-screen bg-[#0077FF] flex items-center justify-center">
-      <HashRouter basename="/walidbook-client">
+      <BrowserRouter basename="/walidbook-client">
         <Routes>
-          <Route path="/" element={<Home user={user} />} />
+          <Route
+            path="/"
+            element={user ? <Home user={user} /> : <Navigate to={"/login"} />}
+          />
           <Route path="/home" element={<Navigate to={"/"} />} />
           <Route
             path="/friends"
@@ -75,7 +78,7 @@ const BrowserSwitch = ({ user, setUser }) => {
             }
           />
         </Routes>
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 };
