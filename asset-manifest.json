@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/walidbook-client/static/css/main.0c73bf8a.css",
-    "main.js": "/walidbook-client/static/js/main.661a40c8.js",
+    "main.css": "/walidbook-client/static/css/main.b1bdc1d5.css",
+    "main.js": "/walidbook-client/static/js/main.78259818.js",
     "static/media/bg.png": "/walidbook-client/static/media/bg.0b8bbf588e554801aec2.png",
     "index.html": "/walidbook-client/index.html",
-    "main.0c73bf8a.css.map": "/walidbook-client/static/css/main.0c73bf8a.css.map",
-    "main.661a40c8.js.map": "/walidbook-client/static/js/main.661a40c8.js.map"
+    "main.b1bdc1d5.css.map": "/walidbook-client/static/css/main.b1bdc1d5.css.map",
+    "main.78259818.js.map": "/walidbook-client/static/js/main.78259818.js.map"
   },
   "entrypoints": [
-    "static/css/main.0c73bf8a.css",
-    "static/js/main.661a40c8.js"
+    "static/css/main.b1bdc1d5.css",
+    "static/js/main.78259818.js"
   ]
 }
