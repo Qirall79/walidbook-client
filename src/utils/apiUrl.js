@@ -1,2 +1,2 @@
-const apiUrl = "http://localhost:5000/";
+const apiUrl = "https://walidbook-api.onrender.com/";
 export default apiUrl;
