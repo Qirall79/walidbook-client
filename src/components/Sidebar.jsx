@@ -25,8 +25,8 @@ const Sidebar = ({ user, path }) => {
   }, []);
 
   return (
-    <div className="">
-      <div className="mb-24 p-7 flex gap-4 items-center">
+    <div className="w-full">
+      <div className="w-full mb-24 p-7 flex gap-4 items-center">
         <img
           src={user.image ? user.image : "../images/none.webp"}
           alt="profile"

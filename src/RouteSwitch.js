@@ -13,13 +13,14 @@ import Find from "./components/Find";
 const BrowserSwitch = ({ user, setUser }) => {
   return (
     <div className="w-screen h-screen bg-[#0077FF] flex items-center justify-center">
-      <BrowserRouter>
+      <BrowserRouter basename="/walidbook-client">
         <Routes>
           <Route path="/" element={<Home user={user} />} />
           <Route path="/home" element={<Navigate to={"/"} />} />
           <Route path="/friends" element={<Friends user={user} />} />
           <Route path="/requests" element={<Requests user={user} />} />
           <Route path="/find" element={<Find user={user} />} />
+
           <Route
             path="/user/:userId"
             element={

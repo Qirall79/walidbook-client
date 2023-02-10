@@ -85,7 +85,7 @@ const Signup = ({ user, setUser }) => {
       ) : (
         <div
           className={
-            "w-1/2 px-32 py-10 flex flex-col items-center justify-center "
+            "w-1/2 p-[5%] lg:px-28 lg:py-10 flex flex-col items-center justify-center "
           }
         >
           <h1 className="self-start w-[120px] mb-10 pb-3 text-3xl font-semibold text-slate-300 border-b-[3px] border-slate-400 ">

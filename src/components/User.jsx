@@ -102,7 +102,7 @@ const User = ({ currentUser, setCurrentUser }) => {
     getPosts();
   }, []);
 
-  if (userId.toString() === currentUser._id.toString()) {
+  if (userId === currentUser._id.toString()) {
     return <Navigate to={"/user"} />;
   }
 

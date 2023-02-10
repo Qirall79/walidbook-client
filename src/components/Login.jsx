@@ -47,7 +47,7 @@ const Login = ({ user, setUser }) => {
           </div>
         )
       ) : (
-        <div className="w-1/2 p-32 flex flex-col items-center justify-center">
+        <div className="w-1/2 p-[5%] lg:p-28 flex flex-col items-center justify-center">
           <h1 className="self-start w-[100px] mb-20 pb-3 text-3xl font-semibold text-slate-300 border-b-[3px] border-slate-400 ">
             Login
           </h1>
