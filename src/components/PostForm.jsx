@@ -24,6 +24,7 @@ const PostForm = ({ getPosts, posts, user }) => {
       });
   };
 
+  // Send form data
   const onSubmit = async (data) => {
     let formData = new FormData();
     formData.append("description", data.description);
@@ -31,6 +32,7 @@ const PostForm = ({ getPosts, posts, user }) => {
     const img = document.querySelector("input[type='file']");
     const imageFile = img.files[0];
 
+    // Resize image for performance purposes
     if (imageFile) {
       // Resize image to increase performance
       const resizedImg = await resizeImage(imageFile);
@@ -48,6 +50,7 @@ const PostForm = ({ getPosts, posts, user }) => {
   };
   return (
     <div className="w-[400px] bg-slate-400 p-5 rounded-2xl ">
+      {/* Display loader while form is being submitted */}
       {!isSubmitted ? (
         <Loader isChild={true} />
       ) : (

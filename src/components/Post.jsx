@@ -30,6 +30,7 @@ const Post = ({ post, postComments, user, posts, setPosts }) => {
     commentsDiv.classList.toggle("hidden");
   };
 
+  // Add/remove like
   const toggleLike = () => {
     sendLike(post._id.toString(), user._id.toString());
     const likers = Object.keys(likes);
@@ -43,16 +44,19 @@ const Post = ({ post, postComments, user, posts, setPosts }) => {
     }
   };
 
-  const submitComment = async ({ body }) => {
+  // Add comment
+  const submitComment = async (data, setSent) => {
     const { comment, author } = await sendComment(
-      body,
+      data.body,
       user._id.toString(),
       post._id.toString()
     );
     const newComment = { ...comment, author };
     setComments([...comments, newComment]);
+    setSent(false);
   };
 
+  // Delete post
   const removePost = async () => {
     const newPosts = posts.filter(
       (p) => p._id.toString() !== post._id.toString()
@@ -108,6 +112,7 @@ const Post = ({ post, postComments, user, posts, setPosts }) => {
                 className="cursor-pointer flex gap-1 items-center text-lg"
                 onClick={toggleLike}
               >
+                {/* if user already liked the post, fill like icon. Else, unfill it. */}
                 {Object.keys(likes).includes(user._id.toString()) ? (
                   <AiFillLike />
                 ) : (
@@ -123,7 +128,7 @@ const Post = ({ post, postComments, user, posts, setPosts }) => {
               </p>
             </div>
             <div
-              className="p-5 flex-col gap-3 hidden   bg-slate-300"
+              className="p-5 flex-col gap-3 hidden bg-slate-300 rounded-b-2xl"
               id={"comments-" + post._id}
             >
               <Comments
@@ -135,6 +140,8 @@ const Post = ({ post, postComments, user, posts, setPosts }) => {
               <CommentForm submitComment={submitComment} />
             </div>
           </div>
+
+          {/* Display delete icon if the currentUser is the owner of the post */}
           {user._id.toString() === post.author._id.toString() ? (
             <TiDelete
               className="absolute top-2 right-2 cursor-pointer text-xl"

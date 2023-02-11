@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import loginUser from "../utils/loginUser";
 import Loader from "./Loader";
+import fetchUser from "../utils/fetchUser";
 
 const Login = ({ user, setUser }) => {
   const [response, setResponse] = useState({ success: false });
@@ -18,6 +19,18 @@ const Login = ({ user, setUser }) => {
     await loginUser(data, setResponse, setSent, setUser);
   };
 
+  // Log in user as visitor by storing the token
+  const loginAsVisitor = async () => {
+    setSent(true);
+    localStorage.setItem(
+      "token",
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjYzZTc2NWI2ZGM1MzkwODYxZTE1YTZjOSIsImZpcnN0TmFtZSI6IlZpc2kiLCJsYXN0TmFtZSI6IlRvciIsImVtYWlsIjoidmlzaXRvckBnbWFpbC5jb20ifSwiaWF0IjoxNjc2MTA5MjM5fQ.vpuhlkS7qXfGnhdWykciPHM04XIV014nq6ofr6nqsOc"
+    );
+    await fetchUser(setUser, setSent);
+    setSent(false);
+  };
+
+  // In case user is already logged in redirect him to homepage
   if (user) {
     return <Navigate to={"/"} />;
   }
@@ -38,6 +51,8 @@ const Login = ({ user, setUser }) => {
           </h1>
         </div>
       </div>
+      {/* If user successfully logged, redirect to homepage. 
+       Otherwise display loader until a response is received*/}
       {sent ? (
         response.success ? (
           <Navigate to={"/"} />
@@ -103,11 +118,19 @@ const Login = ({ user, setUser }) => {
                 ""
               )}
             </div>
-            <input
-              type="submit"
-              value="Login"
-              className="self-start bg-[#0077FF] px-10 py-2 text-sm font-medium text-white cursor-pointer rounded-2xl hover:bg-[#115fb8] transition-all"
-            />
+            <div className="flex gap-5">
+              <input
+                type="submit"
+                value="Login"
+                className="self-start bg-[#0077FF] px-10 py-2 text-sm font-medium text-white cursor-pointer rounded-2xl hover:bg-[#115fb8] transition-all"
+              />
+              <button
+                onClick={loginAsVisitor}
+                className="self-start bg-slate-300 px-10 py-2 text-sm font-medium text-black cursor-pointer rounded-2xl hover:bg-slate-500 transition-all"
+              >
+                Login as visitor
+              </button>
+            </div>
             {response.message ? (
               <p className="text-sm text-red-500 font-medium">
                 Invalid credentials.

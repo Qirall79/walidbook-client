@@ -7,6 +7,7 @@ import Loader from "./Loader";
 const Friends = ({ user, setUser }) => {
   const [loaded, setLoaded] = useState(false);
 
+  // Fetch user again in case there were changes in friends list
   const getUser = async () => {
     await fetchUser(setUser, setLoaded);
   };
@@ -20,10 +21,12 @@ const Friends = ({ user, setUser }) => {
       <Sidebar user={user} path={"/friends"} />
       <div className="pl-1 flex items-center justify-start">
         <div className="w-[97%] h-[93%] bg-slate-900 rounded-3xl p-5 text-black flex flex-col gap-9 items-center">
+          {/* Display loader until user is fetched */}
           {!loaded ? (
             <Loader isChild={true} />
           ) : (
             <div className="p-5 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+              {/* Display each friend with his infos, show friendly message if user has no friends */}
               {!user.friends.length ? (
                 <p className="text-white font-bold">You have no friends.</p>
               ) : (

@@ -9,6 +9,7 @@ import { IoMdSettings } from "react-icons/io";
 import { RiLogoutBoxRFill } from "react-icons/ri";
 
 const Sidebar = ({ user, path }) => {
+  // Add styles to the current page's link on the sidebar
   const setLink = () => {
     const links = document.querySelectorAll(".link-elem");
     const target = document.querySelector(
@@ -29,7 +30,8 @@ const Sidebar = ({ user, path }) => {
   }, []);
 
   return (
-    <div className="w-full">
+    <div className="w-full min-w-fit">
+      {/* Display user infos at the top */}
       <div className="w-full mb-24 p-7 flex gap-4 items-center">
         <img
           src={

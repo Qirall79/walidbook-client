@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import { useEffect, useState } from "react";
@@ -7,18 +8,20 @@ import Loader from "./Loader";
 const Requests = ({ user, setUser }) => {
   const [loaded, setLoaded] = useState(false);
 
+  // Fetch user again in case there were changes while logged in
   const getUser = async () => {
     await fetchUser(setUser, setLoaded);
   };
 
   useEffect(() => {
     getUser();
-  });
+  }, []);
   return (
     <div className="w-[1300px] h-[800px] bg-[#002550] grid grid-cols-[1fr_4fr] grid-rows-1 text-white rounded-3xl">
       <Sidebar user={user} path={"/requests"} />
       <div className="pl-1 flex items-center justify-start">
         <div className="w-[97%] h-[93%] bg-slate-900 rounded-3xl p-5 text-white flex flex-col gap-9 items-center overflow-y-auto overflow-x-hidden">
+          {/* Display loader until user fetched */}
           {!loaded ? (
             <Loader isChild={true} />
           ) : (
@@ -29,7 +32,6 @@ const Requests = ({ user, setUser }) => {
                 </p>
               ) : (
                 user.receivedRequests.map((req) => {
-                  console.log(req);
                   return (
                     <div
                       className="max-w-[500px] flex items-center gap-5 bg-slate-800 py-3 px-7 rounded-lg"

@@ -14,12 +14,17 @@ const Home = ({ user }) => {
   const [fetched, setFetched] = useState(false);
   const [comments, setComments] = useState([]);
 
+  // Fetch user's posts and user friends' posts
   const getPosts = async () => {
     const fetchedPosts = await fetchPosts(user);
+
+    // Sort posts by creation date
     let allPosts = [...fetchedPosts.userPosts, ...fetchedPosts.friendPosts];
     allPosts = allPosts.sort(
       (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt)
     );
+
+    // Get comments
     setComments([...fetchedPosts.comments]);
     setPosts(allPosts);
     setFetched(true);
@@ -28,9 +33,6 @@ const Home = ({ user }) => {
     getPosts();
   }, []);
 
-  if (!user) {
-    return <Navigate to={"/login"} />;
-  }
   return (
     <div className="w-[1300px] h-[800px] bg-[#002550] grid grid-cols-[1fr_4fr] grid-rows-1 text-white rounded-3xl">
       <Sidebar user={user} path={"/"} />
@@ -38,6 +40,7 @@ const Home = ({ user }) => {
       <div className="pl-1 flex items-center justify-start">
         <div className="w-[97%] h-[93%] bg-slate-900 rounded-3xl p-5 text-black flex flex-col gap-9 items-center overflow-auto">
           <PostForm getPosts={getPosts} user={user} />
+          {/* Display loader until posts fetched */}
           {!fetched ? (
             <Loader isChild={true} />
           ) : !posts.length ? (

@@ -31,6 +31,7 @@ const Settings = ({ user, setUser }) => {
       });
   };
 
+  // Submit update form
   const submitForm = async (data) => {
     if (data.new_password !== data.password_confirmation) {
       const p = document.getElementById("pw-error");
@@ -49,8 +50,8 @@ const Settings = ({ user, setUser }) => {
     const img = document.querySelector("input[type='file'");
     const imageFile = img.files[0];
 
+    // Resize image for performance sake
     if (imageFile) {
-      // Resize image to increase performance
       const resizedImg = await resizeImage(imageFile);
       const image = await urlToFile(resizedImg, "picture.png", "image/png");
 
@@ -71,6 +72,7 @@ const Settings = ({ user, setUser }) => {
       <Sidebar user={user} path={"/settings"} />
       <div className="pl-1 flex items-center justify-start">
         <div className="w-[97%] h-[93%] bg-slate-900 rounded-3xl p-5 text-white flex flex-col gap-9 items-center">
+          {/* Display loader while sending form */}
           {isSaving ? (
             <Loader isChild={true} />
           ) : (

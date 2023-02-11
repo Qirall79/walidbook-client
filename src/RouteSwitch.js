@@ -35,7 +35,11 @@ const BrowserSwitch = ({ user, setUser }) => {
           <Route
             path="/requests"
             element={
-              user ? <Requests user={user} /> : <Navigate to={"/login"} />
+              user ? (
+                <Requests user={user} setUser={setUser} />
+              ) : (
+                <Navigate to={"/login"} />
+              )
             }
           />
           <Route

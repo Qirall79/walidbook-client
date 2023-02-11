@@ -3,9 +3,12 @@ import Loader from "./Loader";
 import Sidebar from "./Sidebar";
 
 const Logout = ({ user }) => {
+  // Remove user token and redirect to homepage
   useEffect(() => {
     localStorage.removeItem("token");
     setTimeout(() => {
+      // Can't redirect to login page directly because github pages will consider it a different route
+      // and therefore look for a response from server, since our routing is done client side we will get an error 404
       window.location.href = "https://qirall79.github.io/walidbook-client/";
     }, 1000);
   }, []);

@@ -4,12 +4,15 @@ import fetchPosts from "../utils/fetchPosts";
 import Sidebar from "./Sidebar";
 import Post from "./Post";
 import Loader from "./Loader";
+import { Link } from "react-router-dom";
 
 const CurrentUser = ({ user }) => {
   const [userPosts, setUserPosts] = useState([]);
   const [comments, setComments] = useState([]);
   const [fetched, setFetched] = useState(false);
 
+  // Get user posts before rendering
+  // and split response into posts comments and posts content
   const getPosts = async () => {
     const posts = await fetchPosts(user);
     setUserPosts([...posts.userPosts]);
@@ -39,10 +42,14 @@ const CurrentUser = ({ user }) => {
                 {user.firstName + " " + user.lastName}
               </h1>
               <p>{user.email}</p>
-              <p className="font-semibold"> Friends {user.friends.length}</p>
+              <Link to={"/friends"} className="font-semibold">
+                {" "}
+                Friends {user.friends?.length}
+              </Link>
             </div>
           </div>
           <div className="flex flex-col gap-8">
+            {/* Show loader until posts fetched from the api */}
             {!fetched ? (
               <Loader isChild={true} />
             ) : !userPosts.length ? (

@@ -33,6 +33,7 @@ const User = ({ currentUser, setCurrentUser }) => {
     await deleteFriend(currentUser._id, user._id);
   };
 
+  // Send friend request to the user
   const addFriend = async () => {
     // Update in the client
     const newCurrentUserSentRequests = [
@@ -54,9 +55,13 @@ const User = ({ currentUser, setCurrentUser }) => {
     await sendFriendRequest(currentUser._id, user._id);
   };
 
+  // if user already sent friend request to current user
+  // Handle the action taken
   const answerRequest = async (e) => {
     const action =
       e.target.innerText.toLowerCase() === "accept" ? "accept" : "cancel";
+
+    // remove each other (user and current user) from each other's requests (sent and received)
     const newCurrentUserSentRequests = currentUser.sentRequests.filter(
       (req) => req._id.toString() !== user._id.toString()
     );
@@ -80,6 +85,7 @@ const User = ({ currentUser, setCurrentUser }) => {
       sentRequests: [...newUserSentRequests],
     });
 
+    // Add each other to each other's friends list in case of accept
     if (action === "accept") {
       // Update lists in the frontend for UI purposes
       const newCurrentUserFriends = [...currentUser.friends, { _id: user._id }];
@@ -90,6 +96,7 @@ const User = ({ currentUser, setCurrentUser }) => {
     await updateRequest(action, currentUser._id, user._id);
   };
 
+  // Get user and user's posts
   const getPosts = async () => {
     const fetchedUser = await getSpecificUser(userId);
     setUser({ ...fetchedUser });
@@ -111,6 +118,7 @@ const User = ({ currentUser, setCurrentUser }) => {
       <Sidebar user={currentUser} path={"/find"} />
       <div className="pl-1 flex items-center justify-start">
         <div className="w-[97%] h-[93%] bg-slate-900 rounded-3xl p-5 text-black flex flex-col gap-9 items-center overflow-y-scroll">
+          {/* Display loader until user posts are fetched */}
           {!fetched ? (
             <Loader isChild={true} />
           ) : (
@@ -131,7 +139,7 @@ const User = ({ currentUser, setCurrentUser }) => {
                   <p>{user.email}</p>
                   <p className="font-semibold mb-5">
                     {" "}
-                    Friends {user.friends.length}
+                    Friends {user.friends?.length}
                   </p>
                   <div>
                     {currentUser.friends.filter(

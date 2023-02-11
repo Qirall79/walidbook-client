@@ -27,6 +27,7 @@ const Signup = ({ user, setUser }) => {
       });
   };
 
+  // Submit signup form
   const onSubmit = async (data) => {
     if (data.password !== data.password_confirmation) {
       setMatch(false);
@@ -54,6 +55,7 @@ const Signup = ({ user, setUser }) => {
     await signupUser(formData, setResponse, setSent, setUser);
   };
 
+  // if user exists redirect to homepage
   if (user) {
     return <Navigate to={"/"} />;
   }
@@ -74,6 +76,7 @@ const Signup = ({ user, setUser }) => {
           </h1>
         </div>
       </div>
+      {/* After sent, if no response is received display loader, otherwise redirect to homepage. */}
       {sent ? (
         response.success ? (
           <Navigate to={"/"} />
@@ -240,6 +243,7 @@ const Signup = ({ user, setUser }) => {
               value="Sign Up"
               className="self-start bg-[#0077FF] mt-3 px-10 py-2 text-sm font-medium text-white cursor-pointer rounded-2xl hover:bg-[#115fb8] transition-all"
             />
+            {/* Display server errors if there are any */}
             {response.errors
               ? response.errors.map((err, index) => (
                   <p className="text-sm text-red-500 font-medium" key={index}>

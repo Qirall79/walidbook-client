@@ -1,6 +1,7 @@
 import { ThreeDots } from "react-loader-spinner";
 
 const Loader = ({ isChild }) => {
+  // If loader is child, remove its background and width/height to fit into the parent element
   return (
     <div
       className={`${

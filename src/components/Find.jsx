@@ -7,6 +7,8 @@ import { Link } from "react-router-dom";
 const Find = ({ user }) => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
+
+  // Filter users each time the search bar is changed
   const filterUsers = (e) => {
     const value = e.target.value;
     const filtered = users.filter((u) =>
@@ -17,6 +19,7 @@ const Find = ({ user }) => {
     setFilteredUsers([...filtered]);
   };
 
+  // Fetch all users from database
   const getUsers = async () => {
     const fetchedUsers = await fetchAllUsers(user);
     setUsers([...fetchedUsers]);

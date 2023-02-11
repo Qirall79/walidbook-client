@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { TiDelete } from "react-icons/ti";
+import { Link } from "react-router-dom";
 import deleteComment from "../utils/deleteComment";
 import ConfirmationForm from "./ConfirmationForm";
 
 const Comment = ({ comment, user, setComments, comments }) => {
   const [showDeleteForm, setShowDeleteForm] = useState(false);
 
+  // Display delete confirmation form
   const showConfirmation = () => {
     setShowDeleteForm(true);
   };
@@ -37,15 +39,20 @@ const Comment = ({ comment, user, setComments, comments }) => {
               alt="profile"
             />
             <div>
-              <p className="text-sm font-semibold capitalize">
+              <Link
+                to={"/user/" + comment.author._id}
+                className="text-sm font-semibold capitalize"
+              >
                 {comment.author.firstName + " " + comment.author.lastName}
-              </p>
+              </Link>
               <p className="text-xs font-semibold text-slate-500">
                 {comment.timestamp}
               </p>
             </div>
           </div>
           <p className="pl-2 pb-2">{comment.body}</p>
+
+          {/* Allow user to delete comment if he's the one who wrote it */}
           {user._id.toString() === comment.author._id.toString() ? (
             <TiDelete
               className="absolute top-2 right-2 cursor-pointer text-xl"
