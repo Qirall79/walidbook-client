@@ -24,6 +24,13 @@ The app is live here: https://qirall79.github.io/walidbook-client/
 
 
 ## Technologies Used
-
-- ReactJS
-- Tailwind Css
+### Front-end
+  - ReactJS
+  - Tailwind Css
+  
+### Back-end
+  - NodeJS
+  - ExpressJS
+  - MongoDB
+  - PassportJS
+  - Cloudinary (For image storage)
