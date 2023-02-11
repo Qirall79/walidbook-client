@@ -117,7 +117,7 @@ const User = ({ currentUser, setCurrentUser }) => {
     <div className="w-[1300px] h-[800px] bg-[#002550] grid grid-cols-[1fr_4fr] grid-rows-1 text-white rounded-3xl">
       <Sidebar user={currentUser} path={"/find"} />
       <div className="pl-1 flex items-center justify-start">
-        <div className="w-[97%] h-[93%] bg-slate-900 rounded-3xl p-5 text-black flex flex-col gap-9 items-center overflow-y-scroll">
+        <div className="w-[97%] h-[93%] bg-slate-900 rounded-3xl p-5 text-black flex flex-col gap-9 items-center overflow-auto">
           {/* Display loader until user posts are fetched */}
           {!fetched ? (
             <Loader isChild={true} />
