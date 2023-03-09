@@ -20,7 +20,7 @@ This app is connected to my Walidbook REST API : https://github.com/Qirall79/wal
 
 ## Demo
 
-The app is live here: https://qirall79.github.io/walidbook-client/
+The app is live here: https://qirall79.github.io/walidbook-client/ (it might take some time to start as the api is hosted in a free hosting).
 
 
 ## Technologies Used
